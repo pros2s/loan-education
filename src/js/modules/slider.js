@@ -6,6 +6,7 @@ export default class Slider {
     this.page = document.querySelector(page);
     this.slides = this.page.children;
     this.btns = document.querySelectorAll(btns);
+
     this.slideIndex = 1;
   }
 
@@ -22,6 +23,16 @@ export default class Slider {
     const currentSlide = this.slides[this.slideIndex - 1];
     animateCSS(currentSlide, 'slideInUp');
     currentSlide.style.display = 'block';
+
+    this.hanson.style.display = 'none';
+    try {
+      if (n === 3) {
+        setTimeout(() => {
+          this.hanson.style.display = 'block';
+          animateCSS(this.hanson, 'fadeInUpBig');
+        }, 3000);
+      }
+    } catch(e) {};
   }
 
 
@@ -31,6 +42,8 @@ export default class Slider {
 
 
   render() {
+    this.hanson = document.querySelector('.hanson');
+
     this.btns.forEach(btn => {
       btn.addEventListener('click', () => {
         this.switchSlides(1);
