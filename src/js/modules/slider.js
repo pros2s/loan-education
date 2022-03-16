@@ -1,3 +1,6 @@
+import animateCSS from '../helpers/slide';
+
+
 export default class Slider {
   constructor(page, btns) {
     this.page = document.querySelector(page);
@@ -13,9 +16,12 @@ export default class Slider {
 
     this.slides.forEach(slide => {
       slide.style.display = 'none';
+      slide.style.overflow = 'hidden';
     });
 
-    this.slides[this.slideIndex - 1].style.display = 'block';
+    const currentSlide = this.slides[this.slideIndex - 1];
+    animateCSS(currentSlide, 'slideInUp');
+    currentSlide.style.display = 'block';
   }
 
 
