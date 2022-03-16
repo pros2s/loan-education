@@ -13,4 +13,5 @@ new Promise((resolve, reject) => {
   element.addEventListener('animationend', handleAnimationEnd, {once: true});
 });
 
+
 export default animateCSS;
