@@ -4,6 +4,7 @@ import Slider from './slider';
 export default class MiniSlider extends Slider {
   constructor(container, next, prev, activeClass, style, autoplay) {
     super(container, next, prev, activeClass, style, autoplay);
+    this.slideInterval;
   }
 
 
@@ -64,6 +65,17 @@ export default class MiniSlider extends Slider {
   }
 
 
+  autoSwitch() {
+    if (this.autoplay) {
+      this.slideInterval = setInterval(() => {
+        this.container.appendChild(this.slides[0]);
+        this.styleFirstSlide();
+      }, 5000);
+    };
+  }
+
+
+
   init() {
     //horizontal all slides
     this.container.style.cssText = `
@@ -73,5 +85,11 @@ export default class MiniSlider extends Slider {
 
     this.switchSlide();
     this.styleFirstSlide();
+
+    this.autoSwitch();
+    [this.container, this.prev, this.next].forEach(elem => {
+      elem.addEventListener('mouseover', () => clearInterval(this.slideInterval));
+      elem.addEventListener('mouseleave', () => this.autoSwitch());
+    });
   }
 }
