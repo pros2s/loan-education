@@ -1,13 +1,10 @@
-import animateCSS from '../helpers/slide';
+import Slider from './slider';
+import animateCSS from '../../helpers/slide';
 
 
-export default class Slider {
+export default class MainSlider extends Slider {
   constructor(page, btns) {
-    this.page = document.querySelector(page);
-    this.slides = this.page.children;
-    this.btns = document.querySelectorAll(btns);
-
-    this.slideIndex = 1;
+    super(page, btns);
   }
 
 
@@ -15,17 +12,20 @@ export default class Slider {
     //checks outside slideIndex
     if (n > this.slides.length) this.slideIndex = 1;
     if (n < 1) this.slideIndex = this.slides.length;
+    //
 
     //hides every slide
     this.slides.forEach(slide => {
       slide.style.display = 'none';
       slide.style.overflow = 'hidden';
     });
+    //
 
     //shows current slide with animation
     const currentSlide = this.slides[this.slideIndex - 1];
     animateCSS(currentSlide, 'slideInUp');
     currentSlide.style.display = 'block';
+    //
 
     //fadeInUp 'hanson' block on the third slide
     this.hanson.style.display = 'none';
@@ -37,6 +37,7 @@ export default class Slider {
         }, 3000);
       }
     } catch(e) {};
+    //
   }
 
 
@@ -60,6 +61,7 @@ export default class Slider {
         this.slideIndex = 1;
         this.showSlides(this.slideIndex);
       });
+      //
     });
 
     this.showSlides(this.slideIndex);
