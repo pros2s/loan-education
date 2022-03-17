@@ -3,8 +3,8 @@ import animateCSS from '../../helpers/slide';
 
 
 export default class MainSlider extends Slider {
-  constructor(page, btns) {
-    super(page, btns);
+  constructor(btns) {
+    super(btns);
   }
 
 
