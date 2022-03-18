@@ -6,12 +6,20 @@ import VideoPlayer from './modules/playVideo';
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  //Big slider
-  const pageSlider = new MainSlider({
+  //Big sliders
+  const pageIndexSlider = new MainSlider({
     container: '.page',
     btns: '.next'
   });
-  pageSlider.render();
+  pageIndexSlider.render();
+
+  const pageModulesSlider = new MainSlider({
+    container: '.moduleapp',
+    btns: '.next',
+    moduleNext: '.nextmodule',
+    modulePrev: '.prevmodule',
+  });
+  pageModulesSlider.render();
   /////////////////////////////////////
 
 
