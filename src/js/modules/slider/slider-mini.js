@@ -77,19 +77,23 @@ export default class MiniSlider extends Slider {
 
 
   init() {
-    //horizontal all slides
-    this.container.style.cssText = `
-      display: flex;
-      flex-wrap: wrap;
-    `;
+    try {
+      //horizontal all slides
+      this.container.style.cssText = `
+        display: flex;
+        flex-wrap: wrap;
+      `;
+      /////////////////////////////////////
 
-    this.switchSlide();
-    this.styleFirstSlide();
+      this.switchSlide();
+      this.styleFirstSlide();
 
-    this.autoSwitch();
-    [this.container, this.prev, this.next].forEach(elem => {
-      elem.addEventListener('mouseover', () => clearInterval(this.slideInterval));
-      elem.addEventListener('mouseleave', () => this.autoSwitch());
-    });
+      this.autoSwitch();
+      [this.container, this.prev, this.next].forEach(elem => {
+        elem.addEventListener('mouseover', () => clearInterval(this.slideInterval));
+        elem.addEventListener('mouseleave', () => this.autoSwitch());
+      });
+    }
+    catch(err) {}
   }
 }

@@ -4,8 +4,11 @@ export default class Difference {
   constructor(firstBlock, secondBlock) {
     this.first = document.querySelector(firstBlock);
     this.second = document.querySelector(secondBlock);
-    this.firstItems = this.first.children;
-    this.secondItems = this.second.children;
+    try {
+      this.firstItems = this.first.children;
+      this.secondItems = this.second.children;
+    }
+    catch(err) {};
 
     this.firstCounter = 1;
     this.secondCounter = 1;
@@ -37,7 +40,10 @@ export default class Difference {
 
 
   init() {
-    this.openItems(this.firstItems, this.firstCounter);
-    this.openItems(this.secondItems, this.secondCounter);
+    try {
+      this.openItems(this.firstItems, this.firstCounter);
+      this.openItems(this.secondItems, this.secondCounter);
+    }
+    catch(err) {};
   }
 }
