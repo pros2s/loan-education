@@ -70,6 +70,19 @@ export default class Forms {
   }
 
 
+  checkMailInputs() {
+    const mailInputs = document.querySelectorAll('[name="email"]');
+
+    mailInputs.forEach(mail => {
+      mail.addEventListener('keypress', (e) => {
+        if (e.key.match(/[^a-z 0-9 @ \.]/ig)){
+          e.preventDefault();
+        }
+      });
+    });
+  }
+
+
   //post data to the server
   async fetchData(url, data) {
     let result = fetch(url, {
@@ -90,6 +103,7 @@ export default class Forms {
 
 
   init() {
+    this.checkMailInputs();
     this.phoneMask();
 
     this.forms.forEach((form) => {
