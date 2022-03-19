@@ -72,11 +72,13 @@ export default class MainSlider extends Slider {
 
       //show the first slide on logo click
       btn.parentNode.previousElementSibling.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.logoClicked = true;
+        if (btn.tagName === 'A') {
+          e.preventDefault();
+          this.logoClicked = true;
 
-        this.slideIndex = 1;
-        this.switchSlides(0, this.logoClicked, null);
+          this.slideIndex = 1;
+          this.switchSlides(0, this.logoClicked, null);
+        };
       });
     });
 
