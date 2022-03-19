@@ -3,12 +3,16 @@ export default class VideoPlayer {
     this.btns = document.querySelectorAll(triggers);
     this.overlay = document.querySelector(overlay);
     this.close = this.overlay.querySelector('.close');
+
+    this.onPlayerStateChange = this.onPlayerStateChange.bind(this);//strict context(this) binding
   }
 
 
   bindTriggers() {
     this.btns.forEach(btn => {
       btn.addEventListener('click', () => {
+        this.clickedBtn = btn;//current(clicked) videoplayer for onPlayerStateChange
+
         //create new player only if it hasn't been opened
         if (document.querySelector('iframe#frame')) {
           this.overlay.style.display = 'flex';
@@ -17,13 +21,13 @@ export default class VideoPlayer {
           if (this.path !== btn.getAttribute('data-url')){
             this.path = btn.getAttribute('data-url');
             this.player.loadVideoById({videoId: this.path});
-          }
+          };
           /////////////////////////////////////
         }
         else {
           this.path = btn.getAttribute('data-url');
           this.createPlayer(this.path);
-        }
+        };
       });
     });
   }
@@ -44,10 +48,34 @@ export default class VideoPlayer {
     this.player = new YT.Player('frame', {
       height: '100%',
       width: '100%',
-      videoId: url
+      videoId: url,
+      events: {
+        'onStateChange': this.onPlayerStateChange,//watching state.data to confirm video finish
+      }
     });
 
     this.overlay.style.display = 'flex';
+  }
+
+
+  onPlayerStateChange(state) {
+    const blockedElem = this.clickedBtn.closest('.module__video-item').nextElementSibling;
+    const playCircle = blockedElem.querySelector('.play__circle');
+    const playSVG = this.clickedBtn.querySelector('SVG').cloneNode(true);//clones play svg
+
+    if (state.data === 0) {//state.data = 0 => video has been watched
+      //activates next video styles when current video has been watched
+      playCircle.classList.remove('closed');
+      playCircle.querySelector('SVG').remove();
+      playCircle.appendChild(playSVG);
+
+      playCircle.nextElementSibling.classList.remove('attention');
+      playCircle.nextElementSibling.textContent = 'play video';
+
+      blockedElem.style.filter = 'none';
+      blockedElem.style.opacity = '1';
+      /////////////////////////////////////
+    };
   }
 
 
@@ -64,6 +92,6 @@ export default class VideoPlayer {
 
       this.bindTriggers();
       this.bindCloseBtn();
-    }
+    };
   }
 }
