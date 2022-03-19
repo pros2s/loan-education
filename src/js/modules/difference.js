@@ -1,17 +1,10 @@
 import animateCSS from "../helpers/slide";
 
 export default class Difference {
-  constructor(firstBlock, secondBlock) {
-    this.first = document.querySelector(firstBlock);
-    this.second = document.querySelector(secondBlock);
-    try {
-      this.firstItems = this.first.children;
-      this.secondItems = this.second.children;
-    }
-    catch(err) {};
-
-    this.firstCounter = 1;
-    this.secondCounter = 1;
+  constructor(accordionBlock) {
+    this.first = document.querySelector(accordionBlock);
+    try { this.accordionItems = this.first.children } catch(err) {};
+    this.counter = 1;
   }
 
 
@@ -41,8 +34,7 @@ export default class Difference {
 
   init() {
     try {
-      this.openItems(this.firstItems, this.firstCounter);
-      this.openItems(this.secondItems, this.secondCounter);
+      this.openItems(this.accordionItems, this.counter);
     }
     catch(err) {};
   }

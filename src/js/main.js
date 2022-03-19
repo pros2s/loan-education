@@ -53,7 +53,11 @@ window.addEventListener('DOMContentLoaded', () => {
   /////////////////////////////////////
 
 
-  new Difference('.officerold', '.officernew').init();
+  //accordions
+  new Difference('.officerold').init();
+  new Difference('.officernew').init();
+  /////////////////////////////////////
+  
 
   new Forms('.form').init();
 
@@ -61,6 +65,5 @@ window.addEventListener('DOMContentLoaded', () => {
   //Video players
   new VideoPlayer('.showup .play', '.overlay').init();
   new VideoPlayer('.module__video-item .play', '.overlay').init();
-
   /////////////////////////////////////
 });
