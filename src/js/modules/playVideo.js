@@ -9,25 +9,30 @@ export default class VideoPlayer {
 
 
   bindTriggers() {
-    this.btns.forEach(btn => {
+    this.btns.forEach((btn, i) => {
+      if (i % 2 === 0) btn.setAttribute('data-locked', 'false');
+
       btn.addEventListener('click', () => {
         this.clickedBtn = btn;//current(clicked) videoplayer for onPlayerStateChange
 
-        //create new player only if it hasn't been opened
-        if (document.querySelector('iframe#frame')) {
-          this.overlay.style.display = 'flex';
+        if (btn.getAttribute('data-locked') === 'false') {
+          //create new player only if it hasn't been opened
+          if (document.querySelector('iframe#frame')) {
+            this.overlay.style.display = 'flex';
 
-          //open other video by click on other btn
-          if (this.path !== btn.getAttribute('data-url')){
+            //open other video by click on other btn
+            if (this.path !== btn.getAttribute('data-url')){
+              this.path = btn.getAttribute('data-url');
+              this.player.loadVideoById({videoId: this.path});
+            };
+            /////////////////////////////////////
+          }
+          else {
             this.path = btn.getAttribute('data-url');
-            this.player.loadVideoById({videoId: this.path});
+            this.createPlayer(this.path);
           };
           /////////////////////////////////////
         }
-        else {
-          this.path = btn.getAttribute('data-url');
-          this.createPlayer(this.path);
-        };
       });
     });
   }
@@ -75,6 +80,8 @@ export default class VideoPlayer {
       blockedElem.style.filter = 'none';
       blockedElem.style.opacity = '1';
       /////////////////////////////////////
+
+      blockedElem.querySelector('.play').setAttribute('data-locked', 'false');
     };
   }
 
