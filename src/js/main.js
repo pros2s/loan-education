@@ -3,6 +3,7 @@ import MiniSlider from './modules/slider/slider-mini';
 import ShowUp from './modules/showUp';
 import Accordion from './modules/accordion';
 import Forms from './modules/forms';
+import Download from './modules/download';
 import VideoPlayer from './modules/playVideo';
 
 
@@ -63,6 +64,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   new Forms('.form').init();
+  new Download('.download').downloadFile();
 
 
   //Video players
