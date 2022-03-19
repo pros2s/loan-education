@@ -64,25 +64,28 @@ export default class VideoPlayer {
 
 
   onPlayerStateChange(state) {
-    const blockedElem = this.clickedBtn.closest('.module__video-item').nextElementSibling;
-    const playCircle = blockedElem.querySelector('.play__circle');
-    const playSVG = this.clickedBtn.querySelector('SVG').cloneNode(true);//clones play svg
+    try {
+      const blockedElem = this.clickedBtn.closest('.module__video-item').nextElementSibling;
+      const playCircle = blockedElem.querySelector('.play__circle');
+      const playSVG = this.clickedBtn.querySelector('SVG').cloneNode(true);//clones play svg
 
-    if (state.data === 0) {//state.data = 0 => video has been watched
-      //activates next video styles when current video has been watched
-      playCircle.classList.remove('closed');
-      playCircle.querySelector('SVG').remove();
-      playCircle.appendChild(playSVG);
+      if (state.data === 0) {//state.data = 0 => video has been watched
+        //activates next video styles when current video has been watched
+        playCircle.classList.remove('closed');
+        playCircle.querySelector('SVG').remove();
+        playCircle.appendChild(playSVG);
 
-      playCircle.nextElementSibling.classList.remove('attention');
-      playCircle.nextElementSibling.textContent = 'play video';
+        playCircle.nextElementSibling.classList.remove('attention');
+        playCircle.nextElementSibling.textContent = 'play video';
 
-      blockedElem.style.filter = 'none';
-      blockedElem.style.opacity = '1';
-      /////////////////////////////////////
+        blockedElem.style.filter = 'none';
+        blockedElem.style.opacity = '1';
+        /////////////////////////////////////
 
-      blockedElem.querySelector('.play').setAttribute('data-locked', 'false');
-    };
+        blockedElem.querySelector('.play').setAttribute('data-locked', 'false');
+      };
+    }
+    catch(err) {};
   }
 
 
