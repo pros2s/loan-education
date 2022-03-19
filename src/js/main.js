@@ -1,6 +1,7 @@
 import MainSlider from './modules/slider/slider-main';
 import MiniSlider from './modules/slider/slider-mini';
-import Difference from './modules/difference';
+import ShowUp from './modules/showUp';
+import Accordion from './modules/accordion';
 import Forms from './modules/forms';
 import VideoPlayer from './modules/playVideo';
 
@@ -54,10 +55,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   //accordions
-  new Difference('.officerold').init();
-  new Difference('.officernew').init();
+  new Accordion('.officerold').init();
+  new Accordion('.officernew').init();
+
+  new ShowUp('.module__info-show').init();
   /////////////////////////////////////
-  
+
 
   new Forms('.form').init();
 
